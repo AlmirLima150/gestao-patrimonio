@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Docker & Temp
+temp_pdfs/
+*.pdf
+
+# Configurações sensíveis (CRÍTICO)
+.env
+
+# Banco de Dados Local (se usar SQLite ou volumes de dados)
+postgres_data/
+
+# IDEs
+.vscode/
+.idea/

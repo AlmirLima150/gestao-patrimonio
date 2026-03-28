@@ -1,0 +1,19 @@
+# Web Framework e Servidor
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+
+# Banco de Dados e ORM
+sqlmodel==0.0.16
+psycopg2-binary==2.9.9  # Driver para PostgreSQL (Nuvem/Docker)
+# Se for usar SQLite local no início, o Python já tem suporte nativo.
+
+# Geração de Documentos (Termo de Concessão)
+fpdf2==2.7.8            # Mais moderna e amigável que a FPDF original
+
+# Utilidades e Segurança
+python-multipart==0.0.9 # Necessário se for receber dados de formulários
+python-dotenv==1.0.1    # Para gerenciar chaves e URLs de banco (.env)
+cryptography==42.0.5    # Segurança básica para senhas/tokens se precisar
+
+# Validação de dados (Extensão do Pydantic que o SQLModel usa)
+email-validator==2.1.1
