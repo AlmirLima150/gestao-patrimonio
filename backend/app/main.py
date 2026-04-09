@@ -85,7 +85,12 @@ def atualizar_categoria(categoria_id: int, categoria_data: Categoria, session: S
     
     for key, value in dados_para_atualizar.items():
         setattr(db_categoria, key, value)
-    
+
+    session.add(db_categoria)
+    session.commit()
+    session.refresh(db_categoria)
+    return db_categoria
+
 ## ROTAS DE PATRIMONIO, QUE REPRESENTA OS BENS PATRIMONIAIS QUE SERÃO CONCEDIDOS ATRAVÉS DO TERMO DE CONCESSAO E REALIZA O CONTROLE DE ESTOQUE DOS PATRIMÔNIOS CONCEDIDOS
 
 @app.post("/patrimonios/", tags=["Inventário e Patrimônio"], response_model=Patrimonio)
@@ -140,7 +145,7 @@ def atualizar_patrimonio(patrimonio_id: int, patrimonio_data: Patrimonio, sessio
         if not nova_categoria:
             raise HTTPException(status_code=404, detail="Categoria informada não existe")
     
-    for key, value in dados_para_atualizar().items():
+    for key, value in dados_para_atualizar.items():
         setattr(db_patrimonio, key, value)
     
     session.add(db_patrimonio)
@@ -178,10 +183,10 @@ def create_coordenador(coordenador_data: coordenador, session: SessionDep):
     }
 )
 def deletar_coordenador(coordenador_id: int, session: SessionDep):
-    coordenador = session.get(coordenador, coordenador_id)
-    if not coordenador:
-        raise HTTPException(status_code=404)
-    session.delete(coordenador)
+    db_coordenador = session.get(coordenador, coordenador_id)
+    if not db_coordenador:
+        raise HTTPException(status_code=404, detail="Coordenador não encontrado")
+    session.delete(db_coordenador)
     session.commit()
     return {"detail": "Coordenador deletado com sucesso"}
 
